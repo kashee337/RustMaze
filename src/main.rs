@@ -50,8 +50,8 @@ fn main() {
         .get_matches();
 
     // parse args
-    let w: u32 = args.value_of("width").unwrap().parse().unwrap();
-    let h: u32 = args.value_of("height").unwrap().parse().unwrap();
+    let w: u32 = std::cmp::min(args.value_of("width").unwrap().parse().unwrap(), 151);
+    let h: u32 = std::cmp::min(args.value_of("height").unwrap().parse().unwrap(), 31);
     // sender,reciever
     let (tx, rx): (Sender<Message>, Receiver<Message>) = mpsc::channel();
     // key bind
