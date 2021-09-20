@@ -2,8 +2,8 @@
 Toy program for Rust programming practice.
 
 ## Usage
-* install
+* Install  
 `cargo install --path .`
-* play
-  * You can type "←","↓","→","↑" to move.
+* Play  
+You can type `←`,`↓`,`→`,`↑` to move.
 <img src="./fig/play.gif">
