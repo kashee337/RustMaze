@@ -50,8 +50,14 @@ fn main() {
         .get_matches();
 
     // parse args
-    let w: u32 = std::cmp::min(args.value_of("width").unwrap().parse().unwrap(), 151);
-    let h: u32 = std::cmp::min(args.value_of("height").unwrap().parse().unwrap(), 31);
+    let w: u32 = std::cmp::max(
+        std::cmp::min(args.value_of("width").unwrap().parse().unwrap(), 151),
+        5,
+    );
+    let h: u32 = std::cmp::max(
+        std::cmp::min(args.value_of("height").unwrap().parse().unwrap(), 31),
+        5,
+    );
     // sender,reciever
     let (tx, rx): (Sender<Message>, Receiver<Message>) = mpsc::channel();
     // key bind
