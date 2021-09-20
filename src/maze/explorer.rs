@@ -24,6 +24,8 @@ impl Explorer {
         let mut sy: u32 = 0;
         let mut gx: u32 = 0;
         let mut gy: u32 = 0;
+
+        // detect start-point and goal-point
         for i in 0..h {
             for j in 0..w {
                 if maze[i as usize].chars().nth(j as usize).unwrap() == 'S' {
@@ -44,6 +46,7 @@ impl Explorer {
         if (sx == 0 && sy == 0) || (gx == 0 && gy == 0) {
             Err("invalid maze!".to_string())?;
         }
+        // initialize
         Ok(Explorer {
             cx: sx,
             cy: sy,
@@ -81,6 +84,7 @@ impl Explorer {
         }
     }
     pub fn draw(&mut self) -> Vec<String> {
+        // draw current maze-status
         let mut maze = self.maze.clone();
         maze[self.cy as usize].replace_range(self.cx as usize..(self.cx as usize + 1), "o");
         maze
@@ -125,6 +129,6 @@ fn bfs(
     if shortest_path[sy as usize][sx as usize] >= 0 {
         Ok(shortest_path)
     } else {
-        Err("can't find shortest path".to_string())
+        Err("shortest path is not found.".to_string())
     }
 }
