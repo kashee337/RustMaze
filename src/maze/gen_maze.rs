@@ -52,31 +52,23 @@ pub fn bounds_check(maze: &mut Vec<String>, x: i32, y: i32) -> Result<char, Stri
 
 fn extend_wall(maze: &mut Vec<String>, current_walls: &mut Vec<(usize, usize)>, x: i32, y: i32) {
     let mut directions = Vec::new();
-    if let Ok(_) = bounds_check(maze, x, y - 1) {
-        if maze[(y - 1) as usize].chars().nth(x as usize).unwrap() == '.'
-            && !current_walls.contains(&((y - 2) as usize, x as usize))
-        {
+    if let Ok(c) = bounds_check(maze, x, y - 1) {
+        if c == '.' && !current_walls.contains(&((y - 2) as usize, x as usize)) {
             directions.push(types::Action::Up);
         }
     }
-    if let Ok(_) = bounds_check(maze, x, y + 1) {
-        if maze[(y + 1) as usize].chars().nth(x as usize).unwrap() == '.'
-            && !current_walls.contains(&((y + 2) as usize, x as usize))
-        {
+    if let Ok(c) = bounds_check(maze, x, y + 1) {
+        if c == '.' && !current_walls.contains(&((y + 2) as usize, x as usize)) {
             directions.push(types::Action::Down);
         }
     }
-    if let Ok(_) = bounds_check(maze, x - 1, y) {
-        if maze[y as usize].chars().nth((x - 1) as usize).unwrap() == '.'
-            && !current_walls.contains(&(y as usize, (x - 2) as usize))
-        {
+    if let Ok(c) = bounds_check(maze, x - 1, y) {
+        if c == '.' && !current_walls.contains(&(y as usize, (x - 2) as usize)) {
             directions.push(types::Action::Left);
         }
     }
-    if let Ok(_) = bounds_check(maze, x + 1, y) {
-        if maze[y as usize].chars().nth((x + 1) as usize).unwrap() == '.'
-            && !current_walls.contains(&(y as usize, (x + 2) as usize))
-        {
+    if let Ok(c) = bounds_check(maze, x + 1, y) {
+        if c == '.' && !current_walls.contains(&(y as usize, (x + 2) as usize)) {
             directions.push(types::Action::Right);
         }
     }
@@ -84,7 +76,6 @@ fn extend_wall(maze: &mut Vec<String>, current_walls: &mut Vec<(usize, usize)>, 
     // let mut rng = rand::thread_rng();
     if !directions.is_empty() {
         set_wall(maze, current_walls, x, y).unwrap();
-        let v = directions.len();
         let index = rand::thread_rng().gen_range(0..directions.len() as usize);
         let mut nx = x;
         let mut ny = y;
